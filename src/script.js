@@ -2,12 +2,15 @@
 
 console.log("Loaded");
 
-const files = [...document.getElementsByClassName("file")];
+let files = [...document.getElementsByClassName("file")];
 
 
 chrome.storage.sync.get('folder', function (userDir) {
     files.forEach((file) => {
-        const fileTitle = [...file.getElementsByClassName("file-info")][0].title;
+        let fileTitle = [...file.getElementsByClassName("file-info")][0].title;
+        if (fileTitle === "") {
+            fileTitle = [...file.getElementsByClassName("file-header")][0].getAttribute("data-path");
+        }
         const lines = [...file.getElementsByClassName("js-linkable-line-number")];
 
         lines.forEach((line) => {
@@ -23,8 +26,6 @@ chrome.storage.sync.get('folder', function (userDir) {
             aElement.appendChild(line);
         });
     });
-
-    console.log(data);
 });
 
 
