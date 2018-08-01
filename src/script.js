@@ -2,10 +2,10 @@
 
 console.log("Loaded");
 
-let files = [...document.getElementsByClassName("file")];
 
 
 chrome.storage.sync.get('folder', function (userDir) {
+    const files = [...document.getElementsByClassName("file")];
     files.forEach((file) => {
         let fileTitle = [...file.getElementsByClassName("file-info")][0].title;
         if (fileTitle === "") {
