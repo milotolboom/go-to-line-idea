@@ -11,7 +11,7 @@ chrome.runtime.onInstalled.addListener(function () {
     });
 
     chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-        if (changeInfo.status === 'complete' && tab.active) {
+        if (changeInfo.status === 'complete' && tab.active && tab.url.indexOf("github") >= 0) {
             chrome.tabs.executeScript({
                 file: '/script.js'
             });
