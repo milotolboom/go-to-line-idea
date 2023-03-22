@@ -1,25 +1,32 @@
 {
-  "name": "IDEA github opener",
+  "manifest_version": 3,
+  "name": "Github IDEA opener",
   "version": "1.0",
   "description": "Extension that let's you easily open files while reviewing pull requests",
   "permissions": [
     "activeTab",
+    "scripting",
     "declarativeContent",
     "storage",
     "activeTab",
     "tabs",
-    "http://*/*",
-    "https://*/*"
+    "webRequest"
   ],
-  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "js": ["scripts/content.js"],
+      "css": ["base.css" ],
+      "matches": [
+        "https://github.com/*"
+      ]
+    }
+  ],
+  "options_page": "/options/options.html",
   "background": {
-    "scripts": [
-      "background.js"
-    ],
-    "persistent": false
+    "service_worker": "scripts/background.js"
   },
-  "page_action": {
-    "default_popup": "popup.html",
+  "action": {
+    "default_popup": "popup/popup.html",
     "default_icon": {
       "16": "img/turtle_16.png",
       "32": "img/turtle_32.png",
@@ -32,6 +39,5 @@
     "32": "img/turtle_32.png",
     "48": "img/turtle_64.png",
     "128": "img/turtle_128.png"
-  },
-  "manifest_version": 2
+  }
 }

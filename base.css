@@ -1,0 +1,5 @@
+
+.go-to-line-ide-link:hover ::before {
+    color: #00dbff;
+    text-decoration: underline;
+}
